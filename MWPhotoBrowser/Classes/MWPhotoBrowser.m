@@ -357,10 +357,6 @@ navigationBarBackgroundImageLandscapePhone = _navigationBarBackgroundImageLandsc
     if (SYSTEM_VERSION_LESS_THAN(@"5")) [self viewWillLayoutSubviews];
     
     // Status bar
-    if (self.wantsFullScreenLayout && UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
-        _previousStatusBarStyle = [[UIApplication sharedApplication] statusBarStyle];
-        [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleBlackTranslucent animated:animated];
-    }
     
     // Navigation bar appearance
     if (!_viewIsActive && [self.navigationController.viewControllers objectAtIndex:0] != self) {
@@ -393,9 +389,6 @@ navigationBarBackgroundImageLandscapePhone = _navigationBarBackgroundImageLandsc
     [self setControlsHidden:NO animated:NO permanent:YES];
     
     // Status bar
-    if (self.wantsFullScreenLayout && UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
-        [[UIApplication sharedApplication] setStatusBarStyle:_previousStatusBarStyle animated:animated];
-    }
     
 	// Super
 	[super viewWillDisappear:animated];
@@ -907,11 +900,6 @@ navigationBarBackgroundImageLandscapePhone = _navigationBarBackgroundImageLandsc
         }
         
         // Status Bar
-        if ([UIApplication instancesRespondToSelector:@selector(setStatusBarHidden:withAnimation:)]) {
-            [[UIApplication sharedApplication] setStatusBarHidden:hidden withAnimation:animated?UIStatusBarAnimationFade:UIStatusBarAnimationNone];
-        } else {
-            [[UIApplication sharedApplication] setStatusBarHidden:hidden animated:animated];
-        }
         
         // Get status bar height if visible
         if (![UIApplication sharedApplication].statusBarHidden) {
